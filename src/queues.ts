@@ -1,5 +1,7 @@
+import {Job} from 'bullmq';
 import cronQueue from './queues/cronQueue';
 import trendingVideosQueue from './queues/trendingVideosQueue';
+import {loadVideosWorker} from './worker/loadVideo';
 import {prepareVideosWorker} from './worker/prepareVideos';
 
 const prepareQueues = (): void => {
@@ -17,11 +19,17 @@ const prepareQueues = (): void => {
     console.log('TEST prepare-videos added.');
   });
 
-  cronQueue.on('failed', (error: any) => {
-    console.log(error);
+  cronQueue.on('waiting', (job: Job) => {
+    console.log(job);
   });
-  trendingVideosQueue.on('failed', (error: any) => {
-    console.log(error);
+  trendingVideosQueue.on('waiting', (job: Job) => {
+    console.log(job);
+  });
+  prepareVideosWorker.on('failed', (job: Job) => {
+    console.log(job);
+  });
+  loadVideosWorker.on('failed', (job: Job) => {
+    console.log(job);
   });
 };
 export default prepareQueues;

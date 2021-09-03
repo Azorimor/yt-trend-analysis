@@ -1,6 +1,6 @@
 import {Worker, Job} from 'bullmq';
 import trendingVideosQueue from '../queues/trendingVideosQueue';
-import {REGIONS} from '../utils/config';
+import {REDIS_CONNECTION, REGIONS} from '../utils/config';
 
 export const prepareVideosWorker = new Worker(
   'prepare-videos',
@@ -10,5 +10,6 @@ export const prepareVideosWorker = new Worker(
       trendingVideosQueue.add('load-region', {region: region});
       job.updateProgress((i + 1) / REGIONS.length);
     });
-  }
+  },
+  {connection: REDIS_CONNECTION}
 );
