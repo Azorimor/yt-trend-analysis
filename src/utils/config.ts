@@ -16,3 +16,7 @@ export const REDIS_CONNECTION = {
   port: REDIS_PORT,
   password: REDIS_PASSWORD,
 };
+
+export const REGIONS = process.env.REGIONS
+  ? process.env.REGIONS.split(',')
+  : ['US', 'DE'];
