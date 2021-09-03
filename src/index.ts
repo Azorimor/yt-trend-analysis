@@ -2,6 +2,7 @@ import app from './app';
 import cronQueue from './queues/cronQueue';
 import {PORT} from './utils/config';
 import connection from './utils/mongo';
+import {worker} from './worker/loadRegions';
 
 connection
   .then(() => {
@@ -17,6 +18,9 @@ connection
         .then(() => {
           console.log('cron-queue load-regions added for 0 12 * * *');
         });
+      cronQueue.add('load-regions', {}).then(() => {
+        console.log('TEST load-regions added.');
+      });
     });
   })
   .catch(error => {
