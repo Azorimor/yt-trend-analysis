@@ -1,6 +1,5 @@
-import {MongoClient} from 'mongodb';
+import mongoose from 'mongoose';
 import {MONGO_URI} from './config';
 
-const client = new MongoClient(MONGO_URI);
-
-export default client;
+const connection = mongoose.connect(MONGO_URI);
+export default connection;
