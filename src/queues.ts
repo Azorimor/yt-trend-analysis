@@ -7,16 +7,24 @@ import {BullMQAdapter} from '@bull-board/api/bullMQAdapter';
 
 const prepareQueues = (): void => {
   cronQueue
-    .add('prepare-videos', {}, {repeat: {cron: '0 0 * * *'}})
+    .add(
+      'prepare-videos',
+      {},
+      {repeat: {cron: '0 0 * * *'}, removeOnComplete: 10}
+    )
     .then(() => {
       console.log('cron-queue prepare-videos added for 0 0 * * *');
     });
   cronQueue
-    .add('prepare-videos', {}, {repeat: {cron: '0 12 * * *'}})
+    .add(
+      'prepare-videos',
+      {},
+      {repeat: {cron: '0 12 * * *'}, removeOnComplete: 10}
+    )
     .then(() => {
       console.log('cron-queue prepare-videos added for 0 12 * * *');
     });
-  cronQueue.add('prepare-videos', {}).then(() => {
+  cronQueue.add('prepare-videos', {removeOnComplete: 10}).then(() => {
     console.log('TEST prepare-videos added.'); // TODO remove before deploy
   });
 

@@ -7,7 +7,11 @@ export const prepareVideosWorker = new Worker(
   async (job: Job) => {
     console.log(`Job executed: ${job.id}`);
     REGIONS.forEach((region, i) => {
-      trendingVideosQueue.add('load-region', {region: region});
+      trendingVideosQueue.add(
+        'load-region',
+        {region: region},
+        {removeOnComplete: 10}
+      );
       job.updateProgress(((i + 1) / REGIONS.length) * 100);
     });
   },
