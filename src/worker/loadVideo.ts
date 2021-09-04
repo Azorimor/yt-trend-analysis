@@ -2,7 +2,7 @@ import {Worker, Job} from 'bullmq';
 import {REDIS_CONNECTION} from '../utils/config';
 import {YoutubeService} from '../services/youtube';
 
-const youtube = new YoutubeService()
+const youtube = new YoutubeService();
 
 export const loadVideosWorker = new Worker(
   'load-trending-videos',
