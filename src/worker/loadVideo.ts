@@ -12,7 +12,11 @@ export const loadVideosWorker = new Worker(
     job.updateProgress(50);
     await VideoModel.insertMany(videos);
     job.updateProgress(100);
-    return videos.map(video => video.snippet);
+    return videos.map(video => ({
+      id: video.id,
+      title: video.snippet?.title,
+      url: `https://www.youtube.com/watch?v=${video.id}`,
+    }));
   },
   {connection: REDIS_CONNECTION}
 );
