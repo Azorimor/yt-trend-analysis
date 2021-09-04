@@ -5,7 +5,6 @@ import {REDIS_CONNECTION, REGIONS} from '../utils/config';
 export const prepareVideosWorker = new Worker(
   'prepare-videos',
   async (job: Job) => {
-    console.log(`Job executed: ${job.id}`);
     REGIONS.forEach((region, i) => {
       trendingVideosQueue.add(
         'load-region',
@@ -14,6 +13,7 @@ export const prepareVideosWorker = new Worker(
       );
       job.updateProgress(((i + 1) / REGIONS.length) * 100);
     });
+    return REGIONS;
   },
   {connection: REDIS_CONNECTION}
 );
