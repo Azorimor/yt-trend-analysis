@@ -20,3 +20,5 @@ export const REDIS_CONNECTION = {
 export const REGIONS = process.env.REGIONS
   ? process.env.REGIONS.split(',')
   : ['US', 'DE'];
+
+export const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || '';
