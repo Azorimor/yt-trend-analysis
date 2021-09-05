@@ -24,3 +24,7 @@ export const REGIONS = process.env.REGIONS
 export const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || '';
 export const ACCESS_TOKEN_SECRET =
   process.env.ACCESS_TOKEN_SECRET || 'supersecrettoken42';
+export const DASHBOARD_ADMIN_USERNAME =
+  process.env.DASHBOARD_ADMIN_USERNAME || 'bull';
+export const DASHBOARD_ADMIN_PASSWORD =
+  process.env.DASHBOARD_ADMIN_PASSWORD || 'mypassword';
