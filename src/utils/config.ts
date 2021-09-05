@@ -22,3 +22,5 @@ export const REGIONS = process.env.REGIONS
   : ['US', 'DE'];
 
 export const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || '';
+export const ACCESS_TOKEN_SECRET =
+  process.env.ACCESS_TOKEN_SECRET || 'supersecrettoken42';
