@@ -1,6 +1,7 @@
 import express, {Application} from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import router from './router/main';
 
 const app: Application = express();
 
@@ -12,8 +13,6 @@ app.use(express.urlencoded({extended: true}));
 app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
 
-app.get('/login', (req: express.Request, res: express.Response) => {
-  res.render('login');
-});
+app.use(router);
 
 export default app;
