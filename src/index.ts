@@ -18,8 +18,8 @@ connection
           serverAdapter: serverAdapter,
         }
       );
-      serverAdapter.setBasePath('/bull/admin/');
-      app.use('/bull/admin/', serverAdapter.getRouter());
+      serverAdapter.setBasePath('/bull/');
+      app.use('/bull/', serverAdapter.getRouter());
     });
   })
   .catch(error => {

@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import router from './router/main';
+import {authenticateToken} from './middleware/auth';
 
 const app: Application = express();
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
+app.use('/bull/', authenticateToken);
 app.set('views', __dirname + '/../views');
 app.set('view engine', 'ejs');
 
