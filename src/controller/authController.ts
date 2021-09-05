@@ -10,7 +10,7 @@ import {
 export class AuthController {
   async login(req: Request, res: Response) {
     if (!req.body.username || !req.body.password) {
-      return;
+      return res.redirect('/login');
     }
     const username: string = req.body.username;
     const password: string = req.body.password;
@@ -19,7 +19,7 @@ export class AuthController {
       username !== DASHBOARD_ADMIN_USERNAME ||
       password !== DASHBOARD_ADMIN_PASSWORD
     ) {
-      return res.sendStatus(403);
+      return res.redirect('/login');
     }
     const user = {username, password};
     const token = jwt.sign(user, ACCESS_TOKEN_SECRET, {expiresIn: '7d'});
@@ -30,7 +30,6 @@ export class AuthController {
         httpOnly: true,
         secure: PROD,
       })
-      .status(200)
-      .json({message: 'Logged in successfully.', token: token});
+      .redirect('/bull');
   }
 }
