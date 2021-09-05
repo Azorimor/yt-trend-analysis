@@ -9,12 +9,12 @@ export const authenticateToken = (
 ) => {
   const token = req.cookies.access_token;
   if (!token) {
-    return res.sendStatus(401);
+    return res.redirect('/login');
   }
   jwt.verify(token, ACCESS_TOKEN_SECRET, (error: any, user: any) => {
     if (error) {
       console.log(error);
-      return res.sendStatus(403);
+      return res.redirect('/login');
     }
     // req.user = user;
     next();
