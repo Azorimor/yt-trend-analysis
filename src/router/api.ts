@@ -1,9 +1,9 @@
-import {Router, Request, Response} from 'express';
+import {Router} from 'express';
+import {AuthController} from '../controller/authController';
 
 const apiRouter = Router();
+const authController = new AuthController();
 
-apiRouter.get('/login', (req: Request, res: Response) => {
-  res.render('login');
-});
+apiRouter.get('/login', authController.login);
 
 export default apiRouter;
