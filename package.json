@@ -9,9 +9,9 @@
     "start": "node ./dist/index.js",
     "start:build": "tsc && node ./dist/index.js",
     "start:dev": "nodemon ./src/index.ts",
-    "lint": "gts lint",
+    "lint": "gts lint ./src/**/*.ts",
     "clean": "gts clean",
-    "fix": "gts fix"
+    "fix": "gts fix ./src/**/*.ts"
   },
   "repository": {
     "type": "git",
