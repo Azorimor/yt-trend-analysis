@@ -4,6 +4,7 @@ import trendingVideosQueue from './queues/trendingVideosQueue';
 import {loadVideosWorker} from './worker/loadVideo';
 import {prepareVideosWorker} from './worker/prepareVideos';
 import {BullMQAdapter} from '@bull-board/api/bullMQAdapter';
+import {PROD} from './utils/config';
 
 const prepareQueues = (): void => {
   cronQueue
@@ -15,30 +16,32 @@ const prepareQueues = (): void => {
     .then(() => {
       console.log('cron-queue prepare-videos added for 0 0 * * *');
     });
-  cronQueue
-    .add(
-      'prepare-videos',
-      {},
-      {repeat: {cron: '0 12 * * *'}, removeOnComplete: 10}
-    )
-    .then(() => {
-      console.log('cron-queue prepare-videos added for 0 12 * * *');
+  // cronQueue
+  //   .add(
+  //     'prepare-videos',
+  //     {},
+  //     {repeat: {cron: '0 12 * * *'}, removeOnComplete: 10}
+  //   )
+  //   .then(() => {
+  //     console.log('cron-queue prepare-videos added for 0 12 * * *');
+  //   });
+  if (!PROD) {
+    cronQueue.add('prepare-videos', {removeOnComplete: 10}).then(() => {
+      console.log('TEST prepare-videos added.');
     });
-  cronQueue.add('prepare-videos', {removeOnComplete: 10}).then(() => {
-    console.log('TEST prepare-videos added.'); // TODO remove before deploy
-  });
+  }
 
   cronQueue.on('waiting', (job: Job) => {
-    console.log(job);
+    job.log('waiting...');
   });
   trendingVideosQueue.on('waiting', (job: Job) => {
-    console.log(job);
+    job.log('waiting');
   });
   prepareVideosWorker.on('failed', (job: Job) => {
-    console.log(job);
+    job.log('failed');
   });
   loadVideosWorker.on('failed', (job: Job) => {
-    console.log(job);
+    job.log('failed');
   });
 };
 
