@@ -23,7 +23,7 @@ export const REGIONS = process.env.REGIONS
 
 export const CATEGORIES = process.env.CATEGORIES
   ? process.env.CATEGORIES.split(',')
-  : ['0', '17', '28'];
+  : ['0', '10', '20'];
 
 export const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || '';
 export const ACCESS_TOKEN_SECRET =
