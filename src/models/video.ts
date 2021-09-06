@@ -5,11 +5,13 @@ export interface Video {
   youtube: youtube_v3.Schema$Video;
   rank: Number;
   time: Date;
+  categoryId: string;
 }
 
 const schema = new Schema<Video>({
   rank: Number,
   time: Date,
+  categoryId: String,
   youtube: {
     id: String,
     etag: String,

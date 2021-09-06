@@ -1,16 +1,18 @@
 import {Worker, Job} from 'bullmq';
 import trendingVideosQueue from '../queues/trendingVideosQueue';
-import {REDIS_CONNECTION, REGIONS} from '../utils/config';
+import {CATEGORIES, REDIS_CONNECTION, REGIONS} from '../utils/config';
 
 export const prepareVideosWorker = new Worker(
   'prepare-videos',
   async (job: Job) => {
     REGIONS.forEach((region, i) => {
-      trendingVideosQueue.add(
-        'load-region',
-        {region: region},
-        {removeOnComplete: 10}
-      );
+      CATEGORIES.forEach(categoryId => {
+        trendingVideosQueue.add(
+          'load-region-videos',
+          {region: region, categoryId: categoryId},
+          {removeOnComplete: 10}
+        );
+      });
       job.updateProgress(((i + 1) / REGIONS.length) * 100);
     });
     return REGIONS;

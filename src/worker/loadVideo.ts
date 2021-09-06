@@ -8,7 +8,10 @@ const youtube = new YoutubeService();
 export const loadVideosWorker = new Worker(
   'load-trending-videos',
   async (job: Job) => {
-    const videos = await youtube.getTrendingVideos(job.data.region);
+    const videos = await youtube.getTrendingVideos(
+      job.data.region,
+      job.data.categoryId
+    );
     job.updateProgress(50);
     await VideoModel.insertMany(videos);
     job.updateProgress(100);
@@ -16,6 +19,8 @@ export const loadVideosWorker = new Worker(
       id: video.youtube.id,
       title: video.youtube.snippet?.title,
       url: `https://www.youtube.com/watch?v=${video.youtube.id}`,
+      fetchedCategoryId: video.categoryId,
+      videoCategoryId: video.youtube.snippet?.categoryId,
     }));
   },
   {connection: REDIS_CONNECTION}

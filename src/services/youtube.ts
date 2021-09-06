@@ -5,7 +5,7 @@ import {YOUTUBE_API_KEY} from '../utils/config';
 export class YoutubeService {
   service = google.youtube('v3');
 
-  async getTrendingVideos(regionCode: string) {
+  async getTrendingVideos(regionCode: string, categoryId: string) {
     let youtubeVideos: youtube_v3.Schema$Video[] = [];
     const videos: Video[] = [];
     let nextPage = '';
@@ -16,6 +16,7 @@ export class YoutubeService {
         chart: 'mostPopular',
         regionCode: regionCode,
         maxResults: 200,
+        videoCategoryId: categoryId,
         ...(nextPage === '' && {pageToken: nextPage}),
       });
       if (response.data.items) {
@@ -31,6 +32,7 @@ export class YoutubeService {
         youtube: ytVideo,
         rank: i + 1,
         time: time,
+        categoryId: categoryId,
       };
       videos.push(video);
     });

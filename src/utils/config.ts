@@ -21,6 +21,10 @@ export const REGIONS = process.env.REGIONS
   ? process.env.REGIONS.split(',')
   : ['US', 'DE'];
 
+export const CATEGORIES = process.env.CATEGORIES
+  ? process.env.CATEGORIES.split(',')
+  : ['0', '17', '28'];
+
 export const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || '';
 export const ACCESS_TOKEN_SECRET =
   process.env.ACCESS_TOKEN_SECRET || 'supersecrettoken42';
