@@ -1,0 +1,28 @@
+version: "3.9"
+
+services: 
+  yta:
+    build: .
+    restart: always
+    ports: 
+      - 3000:3000
+    env_file:
+      - .env
+  mongo:
+    image: mongo:4.4
+    restart: always
+    ports: 
+      - 27017:27017
+    volumes: 
+      - mongodb:/data/db
+    # environment: 
+    #   MONGO_INITDB_ROOT_USERNAME: admin
+    #   MONGO_INITDB_ROOT_PASSWORD: securePassword
+  redis:
+    image: redis:alpine
+    restart: always
+    command: redis-server --requirepass securePassword96
+    ports: 
+      - 6379:6379
+volumes: 
+  mongodb:
