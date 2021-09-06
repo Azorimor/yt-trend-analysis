@@ -13,7 +13,7 @@ const schema = new Schema<Video>({
   time: Date,
   categoryId: String,
   youtube: {
-    id: String,
+    id: {type: String, index: true},
     etag: String,
     snippet: {
       publishedAt: String,
