@@ -6,7 +6,7 @@ dotenv.config({path: path});
 
 export const PROD = process.env.NODE_ENV === 'production';
 export const MONGO_URI =
-  process.env.MONGO_URI || 'mongodb://localhost:27017/ytt';
+  process.env.MONGO_URI || 'mongodb://localhost:27017/yta';
 export const PORT = process.env.PORT || 3000;
 export const REDIS_HOST = process.env.REDIS_HOST || 'localhost';
 export const REDIS_PORT = Number(process.env.REDIS_PORT) || 6379;
