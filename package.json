@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
+    "postinstall": "tsc",
     "start": "node ./dist/index.js",
     "start:build": "tsc && node ./dist/index.js",
     "start:dev": "nodemon ./src/index.ts",
@@ -23,6 +24,9 @@
     "url": "https://github.com/Azorimor/yt-trend-analysis/issues"
   },
   "homepage": "https://github.com/Azorimor/yt-trend-analysis#readme",
+  "engines": {
+    "node": "14.x"
+  },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
     "@types/jsonwebtoken": "^8.5.5",
