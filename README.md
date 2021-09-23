@@ -7,7 +7,7 @@ Currently the data is collected and no further analysis is performed.
 ## Requirements
 This analysis tool requires following applications/services:
 - MongoDB database (stores collected data)
-- Redis database (```maxmemory-policy=noeviction```) (stores job information)
+- Redis database (```maxmemory-policy=noeviction```) (stores job information) (currently uses 3-8 MB)
 - Place where this application is running. (Docker / Nodejs)
 ## Installation
 The **Dockerfile** can be used to deploy the application.
