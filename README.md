@@ -10,7 +10,10 @@ This analysis tool requires following applications/services:
 - Redis database (```maxmemory-policy=noeviction```) (stores job information) (currently uses 3-8 MB)
 - Place where this application is running. (Docker / Nodejs)
 ## Installation
-The **Dockerfile** can be used to deploy the application.
+The **Dockerfile** can be used to deploy the application. The docker-compose file provides mongodb and redis. Only some settings need to be adjusted.
+```
+docker-compose up -d
+```
 
 ## Configuration
 Environment virables are used to configure the application. They can be provided using a docker-compose file or an .env environment file. The following environment variables are supported:
